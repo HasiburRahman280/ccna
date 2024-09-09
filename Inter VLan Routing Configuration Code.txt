@@ -1,0 +1,102 @@
+Create VLAN
+===========
+S1#conf t
+S1(config)#vlan 10
+S1(config-vlan)#name IT
+S1(config-vlan)#exit
+S1(config)#vlan 20
+S1(config-vlan)#name ADMIN
+S1(config-vlan)#exit
+S1(config)#vlan 30
+S1(config-vlan)#name ACCOUNTS
+S1(config-vlan)#exit
+S1(config)#
+
+		((( Configuration to same way in others switches )))
+
+
+
+Assign Switch Ports to Respective VLAN
+======================================
+S2#conf t
+S2(config)#interface fastEthernet 0/11
+S2(config-if)#switchport mode access 
+S2(config-if)#switchport access vlan 10
+S2(config-if)#exit 
+S2(config)#interface fastEthernet 0/18
+S2(config-if)#switchport mode access 
+S2(config-if)#switchport access vlan 20
+S2(config-if)#exit 
+S2(config)#interface fastEthernet 0/6
+S2(config-if)#switchport mode access 
+S2(config-if)#switchport access vlan 30
+S3#conf t
+S3(config)#interface fastEthernet 0/11
+S3(config-if)#switchport mode access 
+S3(config-if)#switchport access vlan 10
+S3(config-if)#exit 
+S3(config)#interface fastEthernet 0/18
+S3(config-if)#switchport mode access 
+S3(config-if)#switchport access vlan 20
+S3(config-if)#exit 
+S3(config)#interface fastEthernet 0/6
+S3(config-if)#switchport mode access 
+S3(config-if)#switchport access vlan 30
+
+
+
+Configuring Trunk Port
+=======================
+S1#conf t
+S1(config)#interface fastEthernet 0/1
+S1(config-if)#switchport mode trunk
+S1(config-if)#exit
+S1(config)#interface fastEthernet 0/3
+S1(config-if)#switchport mode trunk
+S1(config-if)#exit
+S1(config)#interface fastEthernet 0/5
+S1(config-if)#switchport mode trunk
+S2#conf t
+S2(config)#interface fastEthernet 0/1
+S2(config-if)#switchport mode trunk 
+S3#conf t
+S3(config)#interface fastEthernet 0/3
+S3(config-if)#switchport mode trunk
+
+
+
+Configuring Sub-interfaces on Router's Physical Interface
+==========================================================
+Router>ena
+Router>enable 
+Router#conf
+Router#configure t
+Enter configuration commands, one per line. End with CNTL/Z.
+Router(config)#hostname R1
+R1(config)#interface fastEthernet 0/1
+R1(config-if)#no shutdown 
+R1(config-if)#exit
+				
+
+VLAN_S10
+R1(config)#interface fastEthernet 0/1.10
+R1(config-subif)#encapsulation dot1Q 10
+R1(config-subif)#ip address 192.168.10.1 255.255.255.0
+R1(config-subif)#no shutdown 
+R1(config-subif)#exit
+
+VLAN_S20
+R1(config)#interface fastEthernet 0/1.20
+R1(config-subif)#encapsulation dot1Q 20
+R1(config-subif)#ip address 192.168.20.1 255.255.255.0
+R1(config-subif)#no shutdown 
+R1(config-subif)#exit
+
+VLAN_S30
+R1(config)#interface fastEthernet 0/1.30
+R1(config-subif)#encapsulation dot1Q 30
+R1(config-subif)#ip address 192.168.30.1 255.255.255.0
+R1(config-subif)#no shutdown 
+R1(config-subif)#do sh ip int br
+
+

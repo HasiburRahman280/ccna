@@ -1,0 +1,149 @@
+SET IP ADDRESS
+==============
+R1#conf
+R1#configure t
+Enter configuration commands, one per line. End with CNTL/Z.
+R1(config)#int fa0/1
+R1(config-if)#ip ad
+R1(config-if)#ip address 11.11.11.253 255.255.255.252
+R1(config-if)#no shut
+R1(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/1, changed state to up
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to up
+R1(config-if)#do wr
+Building configuration...
+[OK]
+R1(config-if)#exit
+R1(config)#exit
+R1#
+%SYS-5-CONFIG_I: Configured from console by console
+R1#
+
+
+
+SET SECOND IP
+=============
+R1>ena
+R1>enable 
+Password: 
+R1#conf
+R1#configure t
+Enter configuration commands, one per line. End with CNTL/Z.
+R1(config)#int fa0/0
+R1(config-if)#ip ad
+R1(config-if)#ip address 11.11.8.1 255.255.255.0
+R1(config-if)#no shut
+R1(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+R1(config-if)#do wr
+Building configuration...
+[OK]
+R1(config-if)#exit
+R1(config)#exit
+R1#
+%SYS-5-CONFIG_I: Configured from console by console
+R1#
+
+
+SET IP ADDRESS IN CLOCK RATE SERIAL INTERFACE:
+==============================================
+R2>ena
+R2>enable 
+Password: 
+R2#conf
+R2#configure t
+Enter configuration commands, one per line. End with CNTL/Z.
+R2(config)#int s0/2/0
+R2(config-if)#ip ad
+R2(config-if)#ip address 11.11.11.245 255.255.255.252
+R2(config-if)#cl
+R2(config-if)#clock r
+R2(config-if)#clock rate 64000
+R2(config-if)#no shut
+%LINK-5-CHANGED: Interface Serial0/2/0, changed state to down
+R2(config-if)#
+R2(config-if)#
+%LINK-5-CHANGED: Interface Serial0/2/0, changed state to up
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/2/0, changed state to up
+R2(config-if)#do wr
+Building configuration...
+[OK]
+R2(config-if)#exit
+R2(config)#exit
+R2#
+%SYS-5-CONFIG_I: Configured from console by console
+R2#
+
+SET IP ADDRESS IN PC:
+=====================
+Click on pc => Desktop => IP Configuration => Static
+IP Address
+Subnet Mask
+Defult Getway
+DNS
+
+
+FOR DELETE ROUTER CONFIGURATION:
+================================
+R1>ena
+R1>enable 
+Password: 
+Password: 
+R1#
+R1#era
+R1#erase st
+Erasing the nvram filesystem will remove all configuration files! Continue? [confirm]
+[OK]
+Erase of nvram: complete
+%SYS-7-NV_BLOCK_INIT: Initialized the geometry of nvram
+R1#relo
+R1#reload 
+Proceed with reload? [confirm]
+System Bootstrap, Version 12.1(3r)T2, RELEASE SOFTWARE (fc1)
+Copyright (c) 2000 by cisco Systems, Inc.
+Initializing memory for ECC
+..
+C2800 processor with 524288 Kbytes of main memory
+Main memory is configured to 64 bit mode with ECC enabled
+
+Readonly ROMMON initialized
+
+program load complete, entry point: 0x8000f000, size: 0xc940
+program load complete, entry point: 0x8000f000, size: 0xc940
+
+program load complete, entry point: 0x8000f000, size: 0x3ed1338
+Self decompressing the image :
+########################################################################## [OK]
+Restricted Rights Legend
+	
+
+DELETE IP OF ROUTER:
+
+AT3#conf
+AT3#configure t
+AT3#configure terminal 
+Enter configuration commands, one per line.  End with CNTL/Z.
+AT3(config)#no ip route 10.10.11.224 255.255.255.240 10.10.11.249 
+AT3(config)#no ip route 10.10.8.0 255.255.254.0 10.10.11.249 
+AT3(config)#no ip route 10.10.10.0 255.255.255.0 10.10.11.249 
+AT3(config)#no ip route 10.10.11.252 255.255.255.252 10.10.11.249 
+AT3(config)#no ip route 10.10.11.128 255.255.255.192 10.10.11.246 
+AT3(config)#no ip route 10.10.11.192 255.255.255.224 10.10.11.246 
+AT3(config)#
+AT3(config)#
+AT3(config)#do sh ip route
+Codes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+     10.0.0.0/8 is variably subnetted, 3 subnets, 2 masks
+C       10.10.11.0/25 is directly connected, FastEthernet0/0
+C       10.10.11.244/30 is directly connected, FastEthernet0/1
+C       10.10.11.248/30 is directly connected, Serial0/3/0

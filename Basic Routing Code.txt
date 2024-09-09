@@ -1,0 +1,57 @@
+Basic Configure of Router:
+==========================
+Router>ena
+Router>enable 
+Router#conf
+Router#configure t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#hostname R1
+R1(config)#ena
+R1(config)#enable  pas
+R1(config)#enable  password cisco
+R1(config)#ena
+R1(config)#enable se
+R1(config)#enable secret cisco123
+R1(config)#do sh run
+Building configuration...
+
+Current configuration : 770 bytes
+!
+version 12.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+hostname R1
+!
+!
+enable secret 5 $1$mERr$5.a6P4JqbNiMX01usIfka/
+enable password cisco
+!
+!
+no ip cef
+no ipv6 cef
+!
+.....more....
+
+R1(config)#lin
+R1(config)#line au
+R1(config)#line aux 0
+R1(config-line)#pas
+R1(config-line)#password cisco123
+R1(config-line)#login
+R1(config-line)#exit
+R1(config)#line con
+R1(config)#line console 0
+R1(config-line)#pas
+R1(config-line)#password cisco123
+R1(config-line)#login
+R1(config-line)#exit
+R1(config)#line vt
+R1(config)#line vty 0 15
+R1(config-line)#pas
+R1(config-line)#password cisco123
+R1(config-line)#login
+R1(config-line)#do wr
+Building configuration...
+[OK]
+R1(config-line)#

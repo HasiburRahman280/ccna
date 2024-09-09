@@ -1,0 +1,46 @@
+
+STATIC CONFIGURE:
+=================
+==> Click on Router => CLI => Enter =>
+R1>ena
+R1>enable 
+Password: 
+R1#conf
+R1#configure t
+Enter configuration commands, one per line. End with CNTL/Z.
+R1(config)#ip route 11.11.10.0 255.255.255.0 11.11.11.250
+R1(config)#ip route 11.11.11.244 255.255.255.252 11.11.11.250
+R1(config)#ip route 11.11.11.0 255.255.255.128 11.11.11.250
+R1(config)#ip route 11.11.11.224 255.255.255.240 11.11.11.250
+R1(config)#ip route 11.11.11.128 255.255.255.192 11.11.11.250
+R1(config)#ip route 11.11.11.192 255.255.255.224 11.11.11.250
+R1(config)#do wr
+Building configuration...
+[OK]
+R1(config)#exit
+R1#
+%SYS-5-CONFIG_I: Configured from console by console
+R1#
+
+				(Have to be configure to same way in others router)
+
+
+SECOND WAY BUT ONLY FOR END ROUTER:
+==================================
+R4>ena
+R4>enable 
+Password: 
+R4#conf
+R4#configure t
+Enter configuration commands, one per line. End with CNTL/Z.
+R4(config)#ip route 0.0.0.0 0.0.0.0 11.11.11.225
+R4(config)#do wr
+Building configuration...
+[OK]
+R4(config)#exit
+R4#
+%SYS-5-CONFIG_I: Configured from console by console
+R4#.
+
+PING
+Click on PC => Desktop => Command Prompt => Type ping <> -t <> Destination ip => Enter.

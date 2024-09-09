@@ -1,0 +1,28 @@
+How to Configuration Bundle:
+
+PagP
+====
+Switch(config)#interface range fastEthernet 0/6-9
+Switch(config-if-range)#switchport mode trunk
+Switch(config-if-range)#speed 100
+Switch(config-if-range)#duplex full
+Switch(config-if-range)#channel-protocol pagp
+Switch(config-if-range)#channel-group 1 mode desirable
+Switch(config-if-range)#do sh ip int br
+
+Oposite Site:
+Switch(config-if-range)#channel-group 1 mode auto
+
+
+LacP
+====
+Switch(config)#interface range fastEthernet 0/14-17
+Switch(config-if-range)#switchport mode trunk
+Switch(config-if-range)#speed 100
+Switch(config-if-range)#duplex full
+Switch(config-if-range)#channel-protocol lacp
+Switch(config-if-range)#channel-group 1 mode active
+Switch(config-if-range)#do sh ip int br
+
+Oposite Site:
+Switch(config-if-range)#channel-group 1 mode passive

@@ -1,0 +1,13 @@
+RIP CONFIGURATION CODE:
+======================
+https://drive.google.com/drive/folders/1Q-Fq22q86e6r0vWQSSAEyUgygIylZ-ha
+
+
+AT1(config)#router rip 
+AT1(config-router)#version 2
+AT1(config-router)#no auto-summary 
+AT1(config-router)#do sh ip route
+AT1(config-router)#network 10.10.8.0
+AT1(config-router)#network 10.10.11.224
+AT1(config-router)#network 10.10.11.252
+AT1(config-router)#do wr

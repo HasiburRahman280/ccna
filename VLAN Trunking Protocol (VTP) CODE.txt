@@ -1,0 +1,78 @@
+SW-1(config)#vtp mode server 
+SW-1(config)#vtp domain cisco
+SW-1(config)#vtp password cisco123
+SW-1(config)#vlan 10
+SW-1(config-vlan)#name IT
+SW-1(config-vlan)#exit
+SW-1(config)#vlan 20
+SW-1(config-vlan)#name HR
+SW-1(config-vlan)#exit
+SW-1(config)#vlan 30
+SW-1(config-vlan)#name ADMIN
+SW-1(config-vlan)#exit
+SW-1(config)#vlan 40
+SW-1(config-vlan)#name ACCOUNTS
+SW-1(config-vlan)#exit
+SW-1(config)#vlan 50
+SW-1(config-vlan)#name TRAINING
+SW-1(config-vlan)#exit
+SW-1(config)#do sh vtp status
+SW-1(config)#do sh vlan br
+SW-1(config)#
+
+==========================================================
+
+SW-2(config)#vtp mode client 
+SW-2(config)#vtp domain cisco
+SW-2(config)#vtp password cisco123
+
+
+==========================================================
+
+SW-4(config)#vtp mode transparent 
+SW-4(config)#vtp domain cisco
+SW-4(config)#vtp password cisco123
+
+=========================================================
+
+SW-4(config)#vlan 10
+SW-4(config-vlan)#name IT
+SW-4(config-vlan)#exit
+SW-4(config)#vlan 20
+SW-4(config-vlan)#name HR
+SW-4(config-vlan)#exit
+SW-4(config)#vlan 30
+SW-4(config-vlan)#name ADMIN
+SW-4(config-vlan)#exit
+SW-4(config)#vlan 40
+SW-4(config-vlan)#name ACCOUNTS
+SW-4(config-vlan)#exit
+SW-4(config)#vlan 50
+SW-4(config-vlan)#name TRAINING
+SW-4(config-vlan)#exit
+SW-4(config)#do sh vlan br
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

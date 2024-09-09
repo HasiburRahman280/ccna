@@ -1,0 +1,75 @@
+
+================= Tunnel =========================
+
+R-2>enable 
+R-2#configure t
+R-2(config)#interface tunnel 1
+R-2(config-if)#ip address 10.10.10.1 255.255.255.0
+R-2(config-if)#no shutdown 
+R-2(config-if)#tunnel mode gre ip
+R-2(config-if)#tunnel source fastEthernet 0/0
+R-2(config-if)#tunnel destination 11.11.11.2
+R-2(config-if)#do wr
+Building configuration...
+[OK]
+
+
+
+R-3>enable 
+R-3#configure t
+R-3(config)#interface tunnel 1
+R-3(config-if)#ip address 10.10.10.2 255.255.255.0
+R-3(config-if)#no shutdown 
+R-3(config-if)#tunnel mode gre ip
+R-3(config-if)#tunnel source fastEthernet 0/1
+R-3(config-if)#tunnel destination 13.13.13.2
+R-3(config-if)#do sh ip int br
+Interface              IP-Address      OK? Method Status                Protocol 
+FastEthernet0/0        192.168.3.1     YES manual up                    up 
+FastEthernet0/1        11.11.11.2      YES manual up                    up 
+Tunnel1                10.10.10.2      YES manual up                    up 
+Vlan1                  unassigned      YES unset  administratively down down
+R-3(config-if)#do wr
+Building configuration...
+[OK]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=========== OSPF ===============================
+
+
+
+
+R-2(config)#router ospf 10
+R-2(config-router)#router-id 1.1.1.1
+R-2(config-router)#network 192.168.1.0 0.0.0.255 area 0
+R-2(config-router)#network 192.168.2.0 0.0.0.255 area 0
+R-2(config-router)#network 10.10.10.0 0.0.0.255 area 0
+R-2(config-router)#do wr
+Building configuration...
+[OK]
+
+
+
+
+
+R-3(config)#router ospf 1
+R-3(config-router)#router-id 2.2.2.2
+R-3(config-router)#network 192.168.3.0 0.0.0.255 area 0
+R-3(config-router)#network 10.10.10.0 0.0.0.255 area 0
+R-3(config-router)#do wr
+Building configuration...
+[OK]
+R-3(config-router)#

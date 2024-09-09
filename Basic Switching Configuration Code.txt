@@ -1,0 +1,92 @@
+SW-1
+====
+Switch>enable 
+Switch#configure t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#hostname SW-1
+SW-1(config)#enable password cisco
+SW-1(config)#enable secret cisco123
+SW-1(config)#interface fa0/1
+SW-1(config-if-range)#switchport mode access 
+SW-1(config-if-range)#switchport port-security maximum 2
+SW-1(config-if-range)#switchport port-security mac-address sticky 
+SW-1(config-if-range)#switchport port-security violation shutdown 
+SW-1(config-if-range)#shutdown 
+SW-1(config-if-range)#
+%LINK-5-CHANGED: Interface FastEthernet0/3, changed state to administratively down
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/3, changed state to down
+
+SW-1(config-if-range)#exit
+SW-1(config)#do wr
+Building configuration...
+[OK]
+SW-1(config)#
+
+
+SW-2
+==============================================================================
+Switch>enable 
+Switch#configure t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#hostname SW-2
+SW-2(config)#enable password cisco
+SW-2(config)#enable secret cisco123
+SW-2(config)#interface range fa0/1-24
+SW-2(config-if-range)#switchport mode access 
+SW-2(config-if-range)#switchport port-security maximum 2
+SW-2(config-if-range)#switchport port-security mac-address sticky 
+SW-2(config-if-range)#switchport port-security violation shutdown 
+SW-2(config-if-range)#shutdown 
+SW-2(config-if-range)#do w
+Building configuration...
+[OK]
+SW-2(config-if-range)#exit
+
+
+
+SW-3
+=====================================================================
+Switch>ena
+Switch>enable 
+Switch#conf
+Switch#configure t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#hostname SW-3
+SW-3(config)#enable password cisco
+SW-3(config)#enable secret cisco123
+SW-3(config)#interface range fa0/1-24
+SW-3(config-if-range)#switchport mode access 
+SW-3(config-if-range)#switchport port-security maximum 2
+SW-3(config-if-range)#switchport port-security mac-address sticky 
+SW-3(config-if-range)#switchport port-security violation shutdown 
+SW-3(config-if-range)#shu
+SW-3(config-if-range)#shutdown 
+SW-3(config-if-range)#do wr
+Building configuration...
+[OK]
+SW-3(config-if-range)#exit
+SW-3(config)#
+
+
+
+Way of the no shutdown:
+===========================================================================
+SW-2>ena
+SW-2>enable 
+SW-2#conf
+SW-2#configure t
+Enter configuration commands, one per line.  End with CNTL/Z.
+SW-2(config)#interface fa0/11
+SW-2(config-if)#no shutdown
+SW-2(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/11, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/11, changed state to up
+
+SW-2(config-if)#description user-1
+SW-2(config-if)#do w
+Building configuration...
+[OK]
+SW-2(config-if-range)#exit
+

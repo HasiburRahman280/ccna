@@ -1,0 +1,93 @@
+Create Standard Access List
+===========================
+R3(config)#access-list 1 deny 192.168.10.0 0.0.0.255
+R3(config)#access-list 1 permit any 
+R3(config)#do sh ac
+
+Place Of Security
+=====================
+R3(config)#interface fastEthernet 0/1
+R3(config-if)#ip access-group 1 out 
+R3(config-if)#do wr
+
+
+For Delete Standard Access-list Configure
+=========================================
+R3(config)#no access-list 1
+R3(config)#interface fastEthernet 0/1
+R3(config-if)#no ip access-group 1 out 
+R3(config)#do sh run
+
+
+
+
+
+Create Extended Access List
+===========================
+Get Browse But not Ping:
+R1(config)#access-list 100 deny icmp host 192.168.10.2 host 192.168.30.3 echo
+Get Ping But not Browse:
+R1(config)#access-list 100 deny tcp host 192.168.10.3 host 192.168.30.2 eq www
+
+For Permit Others Host:
+R1(config)#access-list 100 permit ip any any
+R1(config)#do sh ac
+
+
+Place Of Security
+==================
+R1(config)#interface fastEthernet 0/0
+R1(config-if)#ip access-group 100 in
+R1(config-if)#exit 
+R1(config)#do wr
+Building configuration...
+[OK]	
+
+
+Ping or Browse Don`t Get any:
+=============================
+For Add New Line:
+=================
+R1(config)#ip access-list extended 100
+R1(config-ext-nacl)#21 deny ip host 192.168.10.4 192.168.30.0  0.0.0.255
+R1(config-ext-nacl)#do sh ac
+
+
+
+Create Name Base Access List
+=============================
+R2(config)#ip access-list extended WWW
+R2(config-ext-nacl)#deny tcp 192.168.20.0  0.0.0.255 192.168.30.0  0.0.0.255 eq www
+R2(config-ext-nacl)#permit ip any any
+R2(config-ext-nacl)#exit
+
+
+Place Of Security
+=================
+R2(config)#interface fastEthernet 1/0
+R2(config-if)#ip access-group WWW in
+R2(config-if)#exit 
+R2(config)#do wr
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,177 @@
+Router>ena
+Router>enable 
+Router#conf
+Router#configure t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#ho
+Router(config)#hostname R-1
+R-1(config)#ena
+R-1(config)#enable se
+R-1(config)#enable secret cisco123
+R-1(config)#lin
+R-1(config)#line vt
+R-1(config)#line vty 0 4
+R-1(config-line)#pas
+R-1(config-line)#password cisco123
+R-1(config-line)#log
+R-1(config-line)#login
+R-1(config-line)#exit
+R-1(config)#int
+R-1(config)#interface fa0/0
+R-1(config-if)#ip ad
+R-1(config-if)#ip address 10.10.10.1 255.255.255.0
+R-1(config-if)#no shu
+R-1(config-if)#no shutdown 
+
+R-1(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+R-1(config-if)#exit
+R-1(config)#int
+R-1(config)#interface fa0/1
+R-1(config-if)#ip ad
+R-1(config-if)#ip address 192.168.1.1 255.255.255.0
+R-1(config-if)#no sh
+R-1(config-if)#no shutdown 
+
+R-1(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/1, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to up
+
+R-1(config-if)#exit
+R-1(config)#ip 
+R-1(config)#ip rou
+R-1(config)#ip route 0.0.0.0 0.0.0.0 10.10.10.2
+R-1(config)#do wr
+Building configuration...
+[OK]
+R-1(config)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+R-1(config)#rou
+R-1(config)#router bg
+R-1(config)#router bgp 100
+R-1(config-router)#ne
+R-1(config-router)#neigh
+R-1(config-router)#neighbor 10.10.10.2 re
+R-1(config-router)#neighbor 10.10.10.2 remote-as 200
+R-1(config-router)#net
+R-1(config-router)#network 192.168.1.0 mas
+R-1(config-router)#network 192.168.1.0 mask 255.255.255.0
+R-1(config-router)#do wr
+Building configuration...
+[OK]
+R-1(config-router)#do sh ip bgp summ
+R-1(config-router)#do sh ip bgp summary
+BGP router identifier 192.168.1.1, local AS number 100
+BGP table version is 1, main routing table version 6
+0 network entries using 0 bytes of memory
+0 path entries using 0 bytes of memory
+0/0 BGP path/bestpath attribute entries using 0 bytes of memory
+0 BGP AS-PATH entries using 0 bytes of memory
+0 BGP route-map cache entries using 0 bytes of memory
+0 BGP filter-list cache entries using 0 bytes of memory
+Bitfield cache entries: current 1 (at peak 1) using 32 bytes of memory
+BGP using 32 total bytes of memory
+BGP activity 0/0 prefixes, 0/0 paths, scan interval 60 secs
+
+Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+10.10.10.2      4   200       0       0        1    0    0 00:41:58        4
+
+R-1(config-router)#%BGP-5-ADJCHANGE: neighbor 10.10.10.2 Up
+
+
+
+
+
+
+Router 2
+============================
+
+Router>ena
+Router>enable 
+Router#conf
+Router#configure t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#ho
+Router(config)#hostname R-2
+R-2(config)#ena
+R-2(config)#enable se
+R-2(config)#enable secret cisco123
+R-2(config)#lin
+R-2(config)#line vt
+R-2(config)#line vty 0 4
+R-2(config-line)#pas
+R-2(config-line)#password cisco123
+R-2(config-line)#login
+R-2(config-line)#exit
+R-2(config)#int
+R-2(config)#interface fa0/0
+R-2(config-if)#ip ad
+R-2(config-if)#ip address 10.10.10.2 255.255.255.0
+R-2(config-if)#no sh
+R-2(config-if)#no shutdown 
+
+R-2(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+R-2(config-if)#exit
+R-2(config)#int
+R-2(config)#interface fa0/1
+R-2(config-if)#ip ad
+R-2(config-if)#ip address 192.168.2.1 255.255.255.0
+R-2(config-if)#no shu
+R-2(config-if)#no shutdown 
+
+R-2(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/1, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to up
+
+R-2(config-if)#exit
+R-2(config)#ip route 0.0.0.0 0.0.0.0 10.10.10.1
+R-2(config)#do wr
+Building configuration...
+[OK]
+R-2(config)#rou
+R-2(config)#router bg
+R-2(config)#router bgp 200
+R-2(config-router)#neig
+R-2(config-router)#neighbor 10.10.10.1 re
+R-2(config-router)#neighbor 10.10.10.1 remote-as 100
+R-2(config-router)#%BGP-5-ADJCHANGE: neighbor 10.10.10.1 Up
+
+R-2(config-router)#net
+R-2(config-router)#network 192.168.2.0 mas
+R-2(config-router)#network 192.168.2.0 mask 255.255.255.0
+R-2(config-router)#do wr
+Building configuration...
+[OK]
+R-2(config-router)#do sh ip bg
+R-2(config-router)#do sh ip bgp summary
+BGP router identifier 192.168.2.1, local AS number 200
+BGP table version is 3, main routing table version 6
+2 network entries using 264 bytes of memory
+2 path entries using 104 bytes of memory
+1/1 BGP path/bestpath attribute entries using 184 bytes of memory
+2 BGP AS-PATH entries using 48 bytes of memory
+0 BGP route-map cache entries using 0 bytes of memory
+0 BGP filter-list cache entries using 0 bytes of memory
+Bitfield cache entries: current 1 (at peak 1) using 32 bytes of memory
+BGP using 632 total bytes of memory
+BGP activity 2/0 prefixes, 2/0 paths, scan interval 60 secs
+
+Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+10.10.10.1      4   100       4       3        3    0    0 00:01:19        4
+
+R-2(config-router)#
+
+
+
+
+
+
+
